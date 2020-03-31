@@ -21,7 +21,7 @@ Repository Contents
 
 Documentation
 --------------
-* **Video to come*
+* **Video to come**
 
 
 License Information
@@ -29,7 +29,7 @@ License Information
 
 This product is _**open source**_! 
 
-Various bits of the code have different licenses applied. Anything BatBat related wrote is beerware; feel free to buy us a round (or give an A). 
+Various bits of the code have different licenses applied. Anything BatBot related wrote is beerware; feel free to buy us a round (or give an A). 
 
 Distributed as-is; no warranty is given. This is not a medical device and should not be used to in the detection or prevention of disease, illnesses or otherwise. 
 
