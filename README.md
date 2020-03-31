@@ -1,18 +1,16 @@
 Meet Austin: the SMARTbat
 
- **S**houlder **M**ounted **A**nxiety **R**elieving **T**herapy **Bat**
-===========================================================
+Shoulder Mounted Anxiety Relieving Therapy Bat
+==================================================================
 
-Austin, the SMARTBat, is a shoulder mounted robot that monitors the wearer's **heart rate**, **oxygen saturation**, **respiration**, and **GSR** to build a live and approximate model of the level of stress experienced by the wearer and autonomoulsy administer deep touch pressure therapy through a pnuematic vest when stress levels are out of normal range. Austin also monitors the social environment with verbal feedback on the "emotion" of the room using CV and tone analysis and names of faces it recognizes when queried. Communicating with Autsin is possible thanks to IBM Watson services:
+Austin, the SMARTBat, is a shoulder mounted robot that monitors the wearer's **heart rate**, **oxygen saturation**, **respiration**, and **GSR** to build a live approximate model of the level of stress experienced by the wearer and autonomoulsy administers deep touch pressure therapy through a pnuematic vest when stress levels are out of normal range. Austin also monitors the social environment with verbal feedback on the "emotion" of the room using computer vision and tone analysis and names the faces it recognizes when queried. Communicating with Autsin is possible thanks to IBM Watson services:
 
 - Speech to text
 - Text to speech
 - Watson Assistant
 - Tone Analyzer 
 
-Austin is wrapped up in an adorably cuddleable soft bat plushie that magnetically attaches to the wearer's shoulder and is programmed with physical and emotional responses. 
-
-In social situations some of us become deliterioulsy anxious.
+Austin is wrapped up in an adorably-cuddleable brown bat plushie that magnetically attaches to the wearer's shoulder and is programmed with physical and emotional responses.  
 
 Repository Contents
 -------------------
@@ -23,7 +21,7 @@ Repository Contents
 
 Documentation
 --------------
-
+* **Video to come*
 
 
 License Information
