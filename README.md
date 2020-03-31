@@ -3,14 +3,14 @@ Meet Austin: the SMARTbat
 Shoulder Mounted Anxiety Relieving Therapy Bat
 ==================================================================
 
-Austin, the SMARTBat, is a shoulder mounted robot that monitors the wearer's **heart rate**, **oxygen saturation**, **respiration**, and **GSR** to build a live approximate model of the level of stress experienced by the wearer and autonomoulsy administers deep touch pressure therapy through a pnuematic vest when stress levels are out of normal range. Austin also monitors the social environment with verbal feedback on the "emotion" of the room using computer vision and tone analysis and names the faces it recognizes when queried. Communicating with Autsin is possible thanks to IBM Watson services:
+Austin, the SMARTBat, is a shoulder mounted robot that monitors the wearer's **heart rate**, **oxygen saturation**, **respiration**, and **GSR** to build a live approximate model of the level of stress experienced by the wearer and autonomoulsy administers deep touch pressure therapy through a pnuematic vest when stress levels are out of normal range. Austin also monitors the social environment with verbal feedback on the "emotion" of the room using computer vision and tone analysis and names the faces it recognizes when queried. Communicating with Austin is possible thanks to IBM Watson services:
 
 - Speech to text
 - Text to speech
 - Watson Assistant
 - Tone Analyzer 
 
-Austin is wrapped up in an adorably-cuddleable brown bat plushie that magnetically attaches to the wearer's shoulder and is programmed with physical and emotional responses.  
+Austin is wrapped up in an adorably-cuddleable brown bat plushie that magnetically attaches to the wearer's shoulder and is programmed with physical(gestures) and emotional(RGB LED eyes) responses.  
 
 Repository Contents
 -------------------
