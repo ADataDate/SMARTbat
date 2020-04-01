@@ -34,6 +34,6 @@ Various bits of the code have different licenses applied. Anything BatBot relate
 
 Distributed as-is; no warranty is given. This is not a medical device and should not be used to in the detection or prevention of disease, illnesses or otherwise. 
 
-- Sincerely, 
+Sincerely, 
 
 Probably your students or classmates 
