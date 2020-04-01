@@ -17,8 +17,9 @@ Repository Contents
 
 * **/Documentation** - Images, reports, presentations, papers, etc
 * **/Software** - Arduino sketches and Log files 
-* **/Sensor_test** - UART Communication tests between devices  
-* **/hardware** - Eagle files
+* **/Hardware** - Eagle files
+* **/sensors_test** - UART Communication tests between devices  
+
 
 Documentation
 --------------
