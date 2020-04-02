@@ -54,13 +54,13 @@ MAX30105 HRO2;//MAX heart rate sensor
 
 
 // WiFi network info.
-char ssid[] = "BearsAndBears"; //Place your SSID within the quotations
-char wifiPassword[] = "dudeson666"; //Place your wifi password within the quotations
+char ssid[] = ""; //Place your SSID within the quotations
+char wifiPassword[] = ""; //Place your wifi password within the quotations
 
 // Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
-char username[] = "59d72100-1298-11e8-9f38-9fae3d42ebf0"; //Place username from your account within the quotations
-char password[] = "9314ad7b109d3cbb67591777d2f61dde2b549663"; //Place password from your account within the quotations.
-char clientID[] = "16a2aa40-72f3-11ea-84bb-8f71124cfdfb"; //Place Client ID from your account within the quotations.
+char username[] = ""; //Place username from your account within the quotations
+char password[] = ""; //Place password from your account within the quotations.
+char clientID[] = ""; //Place Client ID from your account within the quotations.
 
 unsigned long lastMillis = 0;
 int O2 = 0;
