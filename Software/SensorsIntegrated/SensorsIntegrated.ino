@@ -2,16 +2,13 @@
     Serial data will be collected by Raspberry Pi or similar in final form
 
     Code is adapted from SparkFun's example code for the MAX30105 heart rate monitor
-    SP02 algorithm is written by Maxim Integrated 
+    SP02 algorithm is written by Maxim Integrated
 */
-
-
-
-
 #include <SPI.h>
 #include <heartRate.h>
 #include <MAX30105.h>
 #include <spo2_algorithm.h>
+#include <SparkFunDS3234RTC.h>
 MAX30105 hro2;
 
 const byte RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
@@ -24,10 +21,12 @@ int beatAvg;
 float respiration;
 
 int GSR = A0;
-int RSP = A1;
-int PRS = A2;
+//int RSP = A1;
+//int PRS = A2;
 
 #define MAX_BRIGHTNESS 255
+#define PRINT_USA_DATE
+#define DS13074_CS_PIN 10 // DeadOn RTC Chip-select pin
 
 #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
 //Arduino Uno doesn't have enough SRAM to store 100 samples of IR led data and red led data in 32-bit format
@@ -51,6 +50,11 @@ void setup() {
 
   Serial.begin(9600);
   Wire.begin();
+  rtc.begin(DS13074_CS_PIN);
+  rtc.set12Hour(); // Use rtc.set12Hour to set to 12-hour mode
+  rtc.autoTime();
+  rtc.update();
+
   // Initialize sensor
   if (!hro2.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
   {
@@ -111,27 +115,38 @@ void loop() {
       redBuffer[i] = hro2.getRed();
       irBuffer[i] = hro2.getIR();
       hro2.nextSample(); //We're finished with this sample so move to next sample
+      
+      rtc.update();//updat clock
 
-      Serial.print(validHeartRate, DEC);
+      int gsrValue = analogRead(GSR);
+      // int respiration = analogRead(RSP);
+      // int pressure = analogRead(PRS);
+
+      //Removing title print statements for easier conversion to excel
+      //Time Log
+      Serial.print((rtc.hour())); // Print hour
+      Serial.print(":");
+      if (rtc.minute() < 10)
+        Serial.print('0'); // Print leading '0' for minute
+      Serial.print((rtc.minute())); // Print minute
+      Serial.print(",");
+
+      Serial.print(heartRate, DEC);
       Serial.print(",");
 
       // Serial.print(F(", SPO2="));
-      Serial.print(validSPO2, DEC);
+      Serial.print(spo2, DEC);
       Serial.print(",");
-      
-      int gsrValue = analogRead(GSR);
-      int respiration = analogRead(RSP);
-      int pressure = analogRead(PRS);
 
-      //Removing title print statements for easier conversion to excel 
+
       // Serial.print(F(", GSR: "));
       Serial.print(gsrValue);
-      Serial.print(",");
+      //Serial.print(",");
       //Serial.print(F(", Respiration: "));
-      Serial.print(respiration);
-      Serial.print(",");
+      // Serial.print(respiration);
+      //Serial.print(",");
       //Serial.print(F(", Pressure: "));
-      Serial.print(pressure);
+      //Serial.print(pressure);
       Serial.println(",");
 
     }
@@ -139,7 +154,7 @@ void loop() {
     maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
     /*
        Print data in the following format:
-       Heart rate, SPO2, GSR, Respiration, pressure
+       Time, Heart rate, SPO2, GSR, Respiration, pressure
        Comma deliminited for easy CSV to Excel conversion
        Name prints for naming data
     */
