@@ -15,7 +15,7 @@ Austin is wrapped up in an adorably-cuddleable brown bat plushie that magnetical
 Repository Contents
 -------------------
 
-* **/Documentation** - Images, reports, presentations, papers, etc
+* **/Documents** - Images, reports, presentations, papers, etc
 * **/Software** - Arduino sketches and Log files 
 * **/Hardware** - Eagle files
 * **/sensors_test** - UART Communication tests between devices  
@@ -31,10 +31,4 @@ License Information
 
 This product is _**open source**_! 
 
-Various bits of the code have different licenses applied. Anything BatBot related wrote is beerware; feel free to buy us a round (or give an A). 
-
 Distributed as-is; no warranty is given. This is not a medical device and should not be used to in the detection or prevention of disease, illness or otherwise. 
-
-Sincerely, 
-
-Probably your students or classmates 
