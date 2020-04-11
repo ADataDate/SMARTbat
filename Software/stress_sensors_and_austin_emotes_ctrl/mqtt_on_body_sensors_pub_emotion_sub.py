@@ -46,17 +46,19 @@ client.subscribe("austin/eye/emotion", qos=1)
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 print(ser.name)
 
-while 1:	
-	print(ser.readline())
+#Read instruction line: "Attach Finger to sensor"
+print(ser.readline())
+
+while 1:
+    line = ser.readline()
+    line = line.decode("utf-8") #convert line to string
+    print(line)	
+    #Publish data after single read
+    publish.single("bio_sesnors/sensors/sensor_data", "line", hostname="hostname")	
+
 ser.close() 
 
-# To do: Add multiple messages publisher code if Joewie prefers
-#
-#msgs = [{'topic':"stress_data/sensors/multiple", 'payload':"multiple 1"},
-#    ("stress_data/sensors/multiple", "time",  "HR", "SPO2", "GSR", 0, False)]
-#publish.multiple(msgs, hostname="----")
-
-publish.single("stress_data/sensors/single", "payload", hostname="hostname")
-
+''' To Do:'''
+ 
 
 client.loop_forever()
