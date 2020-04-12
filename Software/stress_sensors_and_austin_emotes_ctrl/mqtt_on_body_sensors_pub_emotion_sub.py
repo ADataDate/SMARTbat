@@ -45,13 +45,14 @@ url = urlparse.urlparse(url_str)
 client.username_pw_set(url.username, url.password)
 #client.connect(url.hostname, url.port)
 client.connect_async(url.hostname, url.port)
-client.subscribe("austin/eye/emotion", qos=1)
+
 
 # Add all methods defined at the start of the file to the client
 client.on_subscribe = on_subscribe
 client.on_message = on_message
 client.on_connect = on_connect
 client.on_publish = on_publish
+client.subscribe("austin/eye/emotion", qos=1)
 
 # client.loop_forever()
 client.loop_start()
