@@ -149,6 +149,8 @@ void loop() {
       //Serial.print(pressure);
       Serial.println(",");
 
+
+
     }
     //After gathering 25 new samples recalculate HR and SP02
     maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
