@@ -3,6 +3,7 @@ import serial
 import paho.mqtt.client as mqtt
 import paho.mqtt.publish as publish
 import json
+export CLOUDMQTT_URL='mqtt://rwjanqog:0wo-qFBN9zOs@soldier.cloudmqtt.com:16801'
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print("Subscribed: " + str(mid) + " " + str(granted_qos))
@@ -28,7 +29,7 @@ def on_publish(client, userdata, result):
 
 # Note: client name must be unique across devices 
 client_name = "batbot1"
-broker = "broker.hivemq.com"
+broker = "mqtt://rwjanqog:0wo-qFBN9zOs@soldier.cloudmqtt.com:16801"
 client = mqtt.Client(client_name)
 
 
@@ -46,7 +47,7 @@ client.subscribe("austin/eye/emotion", qos=1)
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 print(ser.name)
 
-#Read instruction line: "Attach Finger to sensor"
+#Read instruction line: "Attach Finger to sensor" but do not send
 print(ser.readline())
 
 while 1:
@@ -54,7 +55,7 @@ while 1:
     line = line.decode("utf-8") #convert line to string
     print(line)	
     #Publish data after single read
-    publish.single("bio_sesnors/sensors/sensor_data", "line", hostname="hostname")	
+    publish.single("bio_sesnors/sensors/sensor_data", "line", hostname="mqtt://rwjanqog:0wo-qFBN9zOs@soldier.cloudmqtt.com:16801")	
 
 ser.close() 
 
