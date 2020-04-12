@@ -5,6 +5,7 @@ import paho.mqtt.publish as publish
 import json
 import os
 import urllib.parse as urlparse
+import time 
 
 # Environment variable, run command when using a new terminal
 # export CLOUDMQTT_URL=mqtt://rwjanqog:0wo-qFBN9zOs@soldier.cloudmqtt.com:16801
@@ -65,13 +66,15 @@ print(ser.readline())
 while 1:
     line = ser.readline()
     line = line.decode("utf-8") #convert line to string
-    print(line)
+    #print(line)
     #Publish data after single read
-    client.publish("bio_sesnors/sensors/sensor_data", line)
+    client.publish("bio_sensors/sensors/sensor_data", line)
+    time.sleep(0.1)
 
 ser.close()
 
 ''' TODO:
 Subscribe to 'mild stress' data to activate deep breathe exercise vibrotactile element
+Subscribe to high stress data to activate DTPT vest 
 
 '''
