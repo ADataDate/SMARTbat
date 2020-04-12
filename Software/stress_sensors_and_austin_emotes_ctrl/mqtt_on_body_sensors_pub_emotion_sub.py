@@ -15,11 +15,7 @@ def on_subscribe(client, userdata, mid, granted_qos):
 
 # process a message when recived
 def on_message(client, userdata, msg):
-    m_decode = str(msg.payload.decode("utf-8"))
-    emotion_dict = json.loads(m_decode)
-    for key in emotion_dict:
-        print(key, '->', emotion_dict[key])
-    print('')
+    print(msg.payload)
     '''TODO: add decision on emotion and tx'''
 
 
@@ -30,7 +26,7 @@ def on_connect(client, userdata, flags, rc):
         print("Bad connection return code = ", rc)
 
 def on_publish(client, userdata, result):
-	print("data published \n")
+#	print("data published \n")
 	pass
 
 # Note: client name must be unique across devices
@@ -43,8 +39,8 @@ url_str = os.environ.get("CLOUDMQTT_URL")
 print("If the end of this line doesn't have the URL run command to set environment variable: {}".format(url_str))
 url = urlparse.urlparse(url_str)
 client.username_pw_set(url.username, url.password)
-#client.connect(url.hostname, url.port)
-client.connect_async(url.hostname, url.port)
+client.connect(url.hostname, url.port)
+#client.connect_async(url.hostname, url.port)
 
 
 # Add all methods defined at the start of the file to the client
@@ -54,7 +50,7 @@ client.on_connect = on_connect
 client.on_publish = on_publish
 client.subscribe("austin/eye/emotion", qos=1)
 
-# client.loop_forever()
+#client.loop_forever()
 client.loop_start()
 
 # Read sensor data from Arduino serial
