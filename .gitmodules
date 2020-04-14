@@ -1,0 +1,3 @@
+[submodule "Software/face_recognition_ultra_light"]
+	path = Software/face_recognition_ultra_light
+	url = https://github.com/Sayter99/face_recognition_ultra_light

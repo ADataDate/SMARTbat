@@ -1,5 +1,5 @@
 
-#define sensorPin A0 
+#define respSensorPin A1 
  
 void setup(void) {
   Serial.begin(9600);
@@ -7,19 +7,19 @@ void setup(void) {
 }
  
 void loop(void) {
-  float pressureReading;
-  float averagePressure = 0;
+  float respirationReading;
+  float averageRespiration = 0;
   float numMeas = 25;
 
   for(int i = 0; i<numMeas; i++)
     {
-      pressureReading = analogRead(sensorPin);
-      averagePressure = averagePressure + pressureReading;
+      respirationReading = analogRead(sensorPin);
+      averageRespiration = averageRespiration + respirationReading;
       delay(50);
     }
     averagePressure = averagePressure/numMeas;
 
-  Serial.print("Vest Pressure: "); 
-  Serial.println(averagePressure);    
-  delay(250);
+  Serial.print("Respiration: "); 
+  Serial.println(averageRespiration);    
+  delay(25);
 }
