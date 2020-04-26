@@ -1,60 +1,136 @@
 
- const int pumpPin 9; // Pump control 
- const int vacuumPin 8; //Vacuum control 
- const int pressure A0; //pressure sensor pin 
- const int stopPressure 7; 
- int maxPressure = 0; // Varibale to store desired belt pressure 
- int maxCalc = 0;
- String inputString = "";         // a String to hold incoming data
- bool stringComplete = false;  // whether the string is complete
+const int pumpPin = 9; //Pump control
+const int vacuumPin = 6; //Vacuum control
+const int pressure = A0; //pressure sensor pin
+int pressureReading = 0;
+int minPressure = 0;
+int newMinPressure = 0;
+int maxPressure = 0; // Varibale to store desired belt pressure
+int maxCalc = 0;
+int interruptCalled = 0;
+
+const byte interruptPin = 2;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
   Serial.begin(9600);
   pinMode(pumpPin, OUTPUT);
   pinMode(vacuumPin, OUTPUT);
-  inputString.reserve(200);
+  pinMode(interruptPin, INPUT_PULLUP);
+
+  digitalWrite(pumpPin, LOW);
+  digitalWrite(vacuumPin, HIGH);
+
+  
+  //get on-body, unpumped pressure reading
+  minPressure = analogRead(pressure);
+  Serial.println(minPressure);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), pressureSensor, CHANGE);
+
+  //Start pump
+  digitalWrite(pumpPin, HIGH);
+  delay(500);
+  digitalWrite(pumpPin, LOW);
+  
+  //Press red button to set maxPressure
+  Serial.println("Exiting setup");
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  // print the string when a newline arrives:
-  if (stringComplete) {
+  Serial.println("Start of loop");
+  #if 1
+  //delay(2000);
+  //Test turning on the belt to max pressure
+  pressureReading = analogRead(pressure);
+  Serial.println(pressureReading);
+  if (pressureReading < maxPressure)
+  {
+    Serial.println("pressureREading < maxPressure");
+    Serial.print(pressureReading); Serial.print(' '); Serial.println(maxPressure);
+
+    #if 0
     digitalWrite(pumpPin, HIGH);
-    for(int i = 0; i > 3, i++)
-      {
-            maxCalc = 0; 
-            maxPressure = analogRead(stopPressure);
-            maxCalc += maxPressure
-      }
-      maxPressure = maxCalc/3; //get an average 
-    digitalWrite(pumpPin, LOW);
+    delay(500);
+    digitalWrite(pumpPin, LOW); //Turn on pump until max pressure is achieved
+    #endif
+  }
+  if (pressureReading >= maxPressure)
+  {
+    Serial.println("pressureReading >= maxPressure");
+    Serial.print(pressureReading); Serial.print(' '); Serial.println(maxPressure);
+
+    #if 0
+    digitalWrite(pumpPin, HIGH);
+    delay(500);
+    digitalWrite(pumpPin, LOW); //Turn off pump once it reached max pressure
+
+    if (newMinPressure >= minPressure)
+    {
+      delay(10000); //delay 10 seconds to check for leaks
+      digitalWrite(vacuumPin, LOW);
+      delay(500);
+      digitalWrite(vacuumPin, HIGH);
+      delay(5000);
+      digitalWrite(vacuumPin, LOW);
+      delay(500);
+      digitalWrite(vacuumPin, HIGH);
+    }
+    #endif
 
   }
-}
 
-  
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
+  if ( interruptCalled == 1 )
+  {
+    //turn off pump
+    Serial.println("Processing interrupt");
+    digitalWrite(pumpPin, HIGH);
+    delay(500);
+    digitalWrite(pumpPin, LOW);
+
+  #if 1
+    digitalWrite(vacuumPin, LOW);
+    delay(1000);
+    digitalWrite(vacuumPin, HIGH);
+    delay(2000); //wait for belt to vacuum air out
+    //Turn vacuum off
+    digitalWrite(vacuumPin, LOW);
+    delay(1000);
+    digitalWrite(vacuumPin, HIGH);
+  #else  
+    digitalWrite(vacuumPin, HIGH);
+    delay(1000);
+    digitalWrite(vacuumPin, LOW);
+    delay(2000); //wait for belt to vacuum air out
+    //Turn vacuum off
+    digitalWrite(vacuumPin, HIGH);
+    delay(1000);
+    digitalWrite(vacuumPin, LOW);
+  #endif
+    interruptCalled = 0;
+    
+    Serial.println("Done processing interrupt");
+  }
+
+  #endif
 }
 
 /*
-  SerialEvent occurs whenever a new data comes in the hardware serial RX. This
-  routine is run between each time loop() runs, so using delay inside loop can
-  delay response. Multiple bytes of data may be available.
+  on interrupt: Press the red button to set max pressure and turn off pump and
+  turn on vacuum.
 */
-void serialEvent() {
-  while (Serial.available()) {
-    // get the new byte:
-    char inChar = (char)Serial.read();
-    // add it to the inputString:
-    inputString += inChar;
-    // if the incoming character is a newline, set a flag so the main loop can
-    // do something about it:
-    if (inChar == '\n') {
-      stringComplete = true;
-    }
+void pressureSensor() {
+  Serial.println("Interrupt triggered");
+  maxCalc = 0;
+  for (int i = 0; i < 3; i++) //get an average reading for the max pressure
+  {
+    maxPressure = analogRead(pressure);
+    maxCalc += maxPressure;
   }
+  maxPressure = maxCalc / 3; //get an average
+  interruptCalled = 1;
+  
+  Serial.println(maxPressure);
+  Serial.println("Exiting interrupt");
+  return maxPressure;
 }
