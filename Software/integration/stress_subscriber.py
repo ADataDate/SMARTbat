@@ -19,7 +19,7 @@ class StressSubscriber(Subscriber):
 if __name__ == "__main__":
     client_url_env = "CLOUDMQTT_URL"
     topic_name = "austin_anxiety/belt/therapy"
-    serial_port = '/dev/ttyACM0'
+    serial_port = '/dev/tty.usbmodem141401'
 
     subscriber = StressSubscriber(
         topic_name,

@@ -25,9 +25,8 @@ class GesturePublisher(MQTTClient):
         self.client.loop_start()
 
         while True:
-            n = len(self.GESTURES)
-            nums = np.random.rand(n)
-            self.client.publish(self.topic_name, self.GESTURES[nums])
+            gesture = np.random.choice(self.GESTURES)
+            self.client.publish(self.topic_name, gesture)
             sleep(5)
 
 

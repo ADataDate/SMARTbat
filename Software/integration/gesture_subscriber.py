@@ -20,7 +20,7 @@ class GestureSubscriber(Subscriber):
 if __name__ == "__main__":
     client_url_env = "CLOUDMQTT_URL"
     topic_name = "austin_gestures/body/gesture"
-    serial_port = '/dev/ttyACM0'
+    serial_port = '/dev/tty.usbmodem141401'
 
     subscriber = GestureSubscriber(
         topic_name,

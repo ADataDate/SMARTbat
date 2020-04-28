@@ -25,9 +25,8 @@ class StressPublisher(MQTTClient):
         self.client.loop_start()
 
         while True:
-            n = len(self.STRESS)
-            nums = np.random.rand(n)
-            self.client.publish(self.topic_name, self.STRESS[nums])
+            gesture = np.random.choice(self.STRESS)
+            self.client.publish(self.topic_name, stress)
             sleep(5)
 
 
