@@ -5,9 +5,15 @@ from subscriber import Subscriber
 class StressSubscriber(Subscriber):
     def __init__(self, topic_name, client_url_env, serial_port):
         super().__init__(topic_name, client_url_env, serial_port)
+        self.commands = {'HIGH': 9}
 
     def process(self, msg):
-        raise NotImplementedError()
+        """
+        Arguments
+        ----------
+        msg: str
+        """
+        return str(self.commands[msg])
 
 
 if __name__ == "__main__":

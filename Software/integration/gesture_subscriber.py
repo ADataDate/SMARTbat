@@ -5,9 +5,16 @@ from subscriber import Subscriber
 class GestureSubscriber(Subscriber):
     def __init__(self, topic_name, client_url_env, serial_port):
         super().__init__(topic_name, client_url_env, serial_port)
+        self.commands = {'CON': 7, 'NO': 8}
 
     def process(self, msg):
-        raise NotImplementedError()
+        """
+        Arguments
+        ----------
+        msg: str
+        """
+        return str(self.commands[msg])
+
 
 
 if __name__ == "__main__":
