@@ -1,33 +1,26 @@
 import json
 import numpy as np
+from constant import EMOTIONS, COMMANDS
 
 
-emotions = ['angry', 'scared', 'happy', 'sad', 'surprised', 'neutral']
-commands = {'happy': 1,
-            'sad': 2,
-            'angry': 3,
-            'surprised': 4,
-            'scared': 5,
-            'neutral': 6,
-            'CON': 7,
-            'NO': 8,
-            'HIGH': 9}
-
+def calibrate_callback(msg):
+    print('Start Calibration ...')
+    return str(COMMANDS[msg])
 
 def eye_callback(emotion_dict):
     # Extract Emotion Values Only
     emotion_dict = json.loads(emotion_dict)
-    values = np.array([float(emotion_dict[k]) for k in emotions])
+    values = np.array([float(emotion_dict[k]) for k in EMOTIONS])
     # take max emotion
     idx = np.argmax(values)
-    emotion = emotions[idx]
+    emotion = EMOTIONS[idx]
     print(emotion_dict['name'], emotion)
-    return str(commands[emotion])
+    return str(COMMANDS[emotion])
 
 def gesture_callback(msg):
     print('Gesture: ', msg)
-    return str(commands[msg])
+    return str(COMMANDS[msg])
 
 def stress_callback(msg):
     print('Stress: ', msg)
-    return str(commands[msg])
+    return str(COMMANDS[msg])
