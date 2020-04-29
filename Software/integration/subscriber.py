@@ -3,14 +3,17 @@ import numpy as np
 from client import MQTTClient
 from trigger import ArduinoTrigger
 import time
+from callback import *
 
 
 class Subscriber(MQTTClient):
-    def __init__(self, topic_name, client_url_env, serial_port):
+    def __init__(self, client_url_env, serial_port, subscriber_callbacks):
         super().__init__(client_url_env)
-        self.topic_name = topic_name
-        self.client.subscribe(self.topic_name, qos=1)
+        self.topic_names = list(subscriber_callbacks.keys())
+        for topic_name in self.topic_names:
+            self.client.subscribe(topic_name, qos=1)
         self.arduino_trigger = ArduinoTrigger(serial_port)
+        self.subscriber_callbacks = subscriber_callbacks
 
     def process(self, msg):
         return msg
@@ -21,7 +24,7 @@ class Subscriber(MQTTClient):
     # process a message when recived
     def on_message(self, client, userdata, msg):
         msg_decode = str(msg.payload.decode("utf-8"))
-        msg_processed = self.process(msg_decode)
+        msg_processed = self.subscriber_callbacks[msg.topic](msg_decode)
         self.arduino_trigger.publish(msg_processed)
 
     def on_connect(self, client, userdata, flags, rc):
@@ -36,12 +39,16 @@ class Subscriber(MQTTClient):
 
 if __name__ == "__main__":
     client_url_env = "CLOUDMQTT_URL"
-    topic_name = "austin/eye/motion"
-    serial_port = '/dev/ttyACM0'
+    serial_port = '/dev/tty.usbmodem143401'
+    subscriber_callbacks = {
+        "austin/eye/motion": eye_callback,
+        "austin_gestures/body/gesture": gesture_callback,
+        "austin_anxiety/belt/therapy": stress_callback
+    }
 
     subscriber = Subscriber(
-        topic_name,
         client_url_env,
         serial_port,
+        subscriber_callbacks
     )
     subscriber.loop()
