@@ -88,6 +88,8 @@ void loop() {
   }
   if (contrlVar == 8) {
     //Failure to get speech to text recognized
+    shake();
+    delay(1000);
   }
   if (contrlVar == 9) {
     // Stress Detected activate pump for 2 miniutes, keep track of time and turn on vacuum after 20 minutes
