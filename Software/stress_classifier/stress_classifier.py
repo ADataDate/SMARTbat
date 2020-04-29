@@ -1,3 +1,6 @@
+import os
+import urllib.parse as urlparse
+
 import paho.mqtt.client as paho
 
 # Set to True to test detection.
@@ -34,4 +37,4 @@ client.connect(url.hostname, url.port)
 
 client.subscribe('bio_sensors/sensors/sensor_data', qos=1)
 
-client.loop_start()
+client.loop_forever()
