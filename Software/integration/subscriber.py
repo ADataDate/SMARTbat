@@ -43,7 +43,8 @@ if __name__ == "__main__":
     subscriber_callbacks = {
         "austin/eye/motion": eye_callback,
         "austin_gestures/body/gesture": gesture_callback,
-        "austin_anxiety/belt/therapy": stress_callback
+        "austin_anxiety/belt/therapy": stress_callback,
+        "austin/calibration": calibrate_callback
     }
 
     subscriber = Subscriber(
