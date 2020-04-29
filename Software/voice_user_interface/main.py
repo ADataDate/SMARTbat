@@ -29,7 +29,7 @@ from text_to_speech import *
 shutdown = False
 detection_time = -10.0
 detected_person = 'no one'
-detected_emotion = 'having an identity crisis'
+detected_emotion = 'sad'
 
 # Set to True to test detection.
 TEST_MODE = False
@@ -58,10 +58,9 @@ def on_message(client, userdata, msg):
         global detected_person
         global detected_emotion
         
-        message = str(msg.payload)
+        message = str(msg.payload.decode("utf-8"))
         detection_time = time.time()
         detected_person, detected_emotion = message.split(' ')
-        detected_person = detected_person[2:] # Super hacky, don't judge.
 
 def on_publish(client, userdata, mid):
     print("mid: " + str(mid))
@@ -166,7 +165,7 @@ def listen(responses):
             print('Transcript:', transcript)
 
             trigger = ''
-            for trigger_word in ['joke', 'who', 'emotion', 'calibration', 'shutdown', 'shut down']:
+            for trigger_word in ['joke', 'who', 'emotion', 'calibration', 'shutdown', 'shut down', 'goodnight']:
                 if trigger_word in transcript:
                     print('Detected:', trigger_word)
                     trigger = trigger_word
@@ -189,6 +188,7 @@ def listen(responses):
             elif trigger == 'emotion':
                 if (time.time() - detection_time < DETECTION_THRESHOLD) or TEST_MODE:
                     client.publish('austin_gestures/body/gesture', 'YES', qos=1)
+                    client.publish('austin/eye/detected_emotion', detected_emotion, qos=1)
                     state_emotion(detected_person, detected_emotion)
                     print('Done: Identified emotion')
                 else:
@@ -202,7 +202,7 @@ def listen(responses):
                 client.publish('austin/calibration', 'CAL', qos=1)
                 print('Done: Initiated calibration')
             
-            elif trigger == 'shutdown' or trigger == 'shut down':
+            elif trigger == 'shutdown' or trigger == 'shut down' or trigger == 'goodnight':
                 announce_shutdown()
                 global shutdown
                 shutdown = True
@@ -229,7 +229,8 @@ def main():
                                                          'read emotion',
                                                          'calibration',
                                                          'shutdown',
-                                                         'shut down'])
+                                                         'shut down',
+                                                         'goodnight'])
 
     client = speech.SpeechClient()
     config = speech.types.RecognitionConfig(
