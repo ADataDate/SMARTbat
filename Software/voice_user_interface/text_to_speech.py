@@ -65,12 +65,12 @@ def tell_a_joke():
     text_to_speech(random.choice(jokes))
 
 def no_one_detected():
-    text_to_speech("Uhmm.. There's no one there, I think you're imagining things. You should get that checked out!")
+    text_to_speech("Sorry, I don't see anyone.")
 
 def name_people(people_list):
     num = len(people_list)
     if num == 0:
-        text_to_speech("Uhmm.. There's no one there, I think you're imagining things. You should get that checked out!")
+        text_to_speech("Sorry, I don't see anyone.")
     elif num == 1:
         text_to_speech("That's " + people_list[0] + "!")
     elif num == 2:
@@ -91,7 +91,7 @@ def announce_calibration():
     text_to_speech("Calibration, starting now!")
 
 def did_not_understand():
-    text_to_speech("Sorry, I did not quite understand what you just said.")
+    text_to_speech("My apologies, I did not quite understand what you just said.")
 
 def announce_shutdown():
     text_to_speech("Okay, nighty nighty! Don't let the bed bats bite!")
