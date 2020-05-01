@@ -61,6 +61,10 @@ To start the stress classifier, run the following:
 cd ./Software/stress_classifier
 python stress_classifier.py
 ```
+### Wearable Sensors
+
+The arduino sketch **_Sensors_** serially outputs the heart rate, blood oxygen saturation, respiration and GSR data values which is read 
+the script **_mqtt_on_body_sensors_pub_emotions_sub_**. This script then publishes the sensor data to a broker via MQTT. 
 
 Demonstration
 -------------
