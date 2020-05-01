@@ -18,6 +18,47 @@ Repository Contents
 * **/Hardware** - Eagle files
 * **/sensors_test** - UART Communication tests between devices  
 
+Dependencies & Installation
+--------------
+
+### Common Requirements
+
+All components require the `CLOUDMQTT_URL` environment variable to be correctly set. The required `paho-mqtt` Python package can be installed as follows:
+```
+pip install --upgrade paho-mqtt
+```
+
+### Voice User Interface (VUI)
+
+The VUI requires a Google Cloud service account with access to the Cloud Speech-to-Text API and Cloud Text-to-Speech API. The location of the key file for the service account should be specified with the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
+
+The required Python packages specific to the VUI can be installed as follows:
+```
+pip install --upgrade google-cloud-texttospeech
+pip install --upgrade google-cloud-speech
+pip install --upgrade pyaudio
+pip install --upgrade pygame
+```
+
+### Stress Classifier
+
+The stress classifier has no additional dependencies.
+
+Running the Software
+--------------
+
+### Voice User Interface (VUI)
+```
+cd ./Software/voice_user_interface
+python main.py
+```
+
+### Stress Classifier
+```
+cd ./Software/stress_classifier
+python stress_classifier.py
+```
+
 
 Documentation
 --------------
