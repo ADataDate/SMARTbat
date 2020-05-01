@@ -18,9 +18,24 @@ Repository Contents
 * **/Hardware** - Eagle files
 * **/sensors_test** - UART Communication tests between devices  
 
-
 Documentation
---------------
+-------------
+To publish messages via MQTT, make sure you have an environment variable **CLOUDMQTT_URL:**
+```bash
+export CLOUDMQTT_URL=<url of your mqtt broker>
+```
+
+### Austin
+
+### Facial and Emotion Recognition
+See [Facial and Emotion Recognition Documentation](https://github.com/Sayter99/face_recognition_ultra_light/blob/master/README.md)
+
+### Voice Interface
+
+### Stress Classifier
+
+Demonstration
+-------------
 * **Video to come**
 
 
