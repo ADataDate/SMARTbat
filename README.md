@@ -18,50 +18,52 @@ Repository Contents
 * **/Hardware** - Eagle files
 * **/sensors_test** - UART Communication tests between devices  
 
-Dependencies & Installation
---------------
-
-### Common Requirements
-
-All components require the `CLOUDMQTT_URL` environment variable to be correctly set. The required `paho-mqtt` Python package can be installed as follows:
+Documentation
+-------------
+To publish and subscribe to messages via MQTT, make sure you have an environment variable **CLOUDMQTT_URL:**
+```bash
+export CLOUDMQTT_URL=<url of your mqtt broker>
 ```
+Python scripts also require the Eclipse Paho MQTT Python client library to be installed:
+```bash
 pip install --upgrade paho-mqtt
 ```
+
+### Austin
+
+### Facial and Emotion Recognition
+See [Facial and Emotion Recognition Documentation](https://github.com/Sayter99/face_recognition_ultra_light/blob/master/README.md)
 
 ### Voice User Interface (VUI)
 
 The VUI requires a Google Cloud service account with access to the Cloud Speech-to-Text API and Cloud Text-to-Speech API. The location of the key file for the service account should be specified with the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 
 The required Python packages specific to the VUI can be installed as follows:
-```
+```bash
 pip install --upgrade google-cloud-texttospeech
 pip install --upgrade google-cloud-speech
 pip install --upgrade pyaudio
 pip install --upgrade pygame
 ```
 
-### Stress Classifier
-
-The stress classifier has no additional dependencies.
-
-Running the Software
---------------
-
-### Voice User Interface (VUI)
-```
+To start the VUI, run the following:
+```bash
 cd ./Software/voice_user_interface
 python main.py
 ```
 
 ### Stress Classifier
-```
+
+The stress classifier has no additional dependencies.
+
+To start the stress classifier, run the following:
+```bash
 cd ./Software/stress_classifier
 python stress_classifier.py
 ```
 
-
-Documentation
---------------
+Demonstration
+-------------
 * **Video to come**
 
 
