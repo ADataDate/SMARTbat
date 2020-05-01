@@ -5,8 +5,8 @@ Shoulder Mounted Anxiety Relieving Therapy Bat
 
 Austin, the SMARTBat, is a shoulder mounted robot that monitors the wearer's **heart rate**, **oxygen saturation**, **respiration**, and **GSR** to build a live approximate model of the level of stress experienced by the wearer and autonomoulsy administers deep touch pressure therapy through a pnuematic vest when stress levels are out of normal range. Austin also monitors the social environment with verbal feedback on the "emotion" of the room using computer vision and tone analysis and names the faces it recognizes when queried. Communicating with Austin is possible thanks to Google cloud services:
 
-- Speech to text
-- Text to speech
+- [Speech-to-Text](https://cloud.google.com/speech-to-text)
+- [Text-to-Speech](https://cloud.google.com/text-to-speech)
 
 Austin is wrapped up in an adorably-cuddleable brown bat plushie that magnetically attaches to the wearer's shoulder and is programmed with physical(gestures) and emotional(RGB LED eyes) responses.  
 
@@ -32,13 +32,13 @@ pip install --upgrade paho-mqtt
 ### Austin
 
 ### Facial and Emotion Recognition
-See [Facial and Emotion Recognition Documentation](https://github.com/Sayter99/face_recognition_ultra_light/blob/master/README.md)
+See [Facial and Emotion Recognition Documentation](https://github.com/Sayter99/face_recognition_ultra_light/blob/master/README.md).
 
 ### Voice User Interface (VUI)
 
 The VUI requires a Google Cloud service account with access to the Cloud Speech-to-Text API and Cloud Text-to-Speech API. The location of the key file for the service account should be specified with the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 
-The required Python packages specific to the VUI can be installed as follows:
+The VUI works with Python 3.7.1, and the required packages specific to the VUI can be installed as follows:
 ```bash
 pip install --upgrade google-cloud-texttospeech
 pip install --upgrade google-cloud-speech
@@ -54,7 +54,7 @@ python main.py
 
 ### Stress Classifier
 
-The stress classifier has no additional dependencies.
+The stress classifier works with Python 3.7.1, and has no additional dependencies.
 
 To start the stress classifier, run the following:
 ```bash
