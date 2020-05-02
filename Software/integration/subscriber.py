@@ -38,9 +38,13 @@ class Subscriber(MQTTClient):
 
 
 if __name__ == "__main__":
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument('-s', '--serial_port', type=str, default='/dev/tty.usbmodem143401')
+    args = arg_parser.parse_args()
+
     client_url_env = "CLOUDMQTT_URL"
-    serial_port = '/dev/tty.usbmodem143401'
-    serial_port = '/dev/tty.usbserial-DN018JW5'
+    # serial_port = '/dev/tty.usbserial-DN018JW5'
+
     subscriber_callbacks = {
         "austin/eye/detected_emotion": eye_callback,
         "austin_gestures/body/gesture": gesture_callback,
@@ -49,8 +53,8 @@ if __name__ == "__main__":
     }
 
     subscriber = Subscriber(
-        client_url_env,
-        serial_port,
-        subscriber_callbacks
+        client_url_env=client_url_env,
+        serial_port=args.serial_port,
+        subscriber_callbacks=subscriber_callbacks
     )
     subscriber.loop()
