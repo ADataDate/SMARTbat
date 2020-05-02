@@ -8,15 +8,15 @@ Austin, the SMARTBat, is a shoulder mounted robot that monitors the wearer's **h
 - [Speech-to-Text](https://cloud.google.com/speech-to-text)
 - [Text-to-Speech](https://cloud.google.com/text-to-speech)
 
-Austin is wrapped up in an adorably-cuddleable brown bat plushie that magnetically attaches to the wearer's shoulder and is programmed with physical(gestures) and emotional(RGB LED eyes) responses.  
+Austin is wrapped up in an adorably-cuddleable brown bat plushie that magnetically attaches to the wearer's shoulder and is programmed with physical(gestures) and emotional(RGB LED eyes) responses.
 
 Repository Contents
 -------------------
 
 * **/Documents** - Images, reports, presentations, papers, etc
-* **/Software** - Arduino sketches, Python scripts, and Log files 
+* **/Software** - Arduino sketches, Python scripts, and Log files
 * **/Hardware** - Eagle files
-* **/sensors_test** - UART Communication tests between devices  
+* **/sensors_test** - UART Communication tests between devices
 
 Documentation
 -------------
@@ -29,9 +29,20 @@ Python scripts also require the Eclipse Paho MQTT Python client library to be in
 pip install --upgrade paho-mqtt
 ```
 
-### Integration
+### Integration (+Austin)
+First plug `Arduino` to your computer or raspberry pi on which you are going to run this python script.
+Upload a sketch called `Software/stress_sensors_and_austin_emotes_ctrl/AustinOutput/AustinOutput.ino` to the `Arduino`.
 
-### Austin
+To receive commands from MQTT and to forward the commands to Austin, just run
+
+```
+python Software/integration/subscriber.py --serial_port=<serial port of your arduino>
+```
+
+### Belt (Currently this is still under development due to hardware issue)
+The belt has a separate sketch from that of Austin's.
+Please upload a sketch called `Software/motion_control/motion_control.ino` to the other Arduino on the belt.
+
 
 ### Facial and Emotion Recognition
 See [Facial and Emotion Recognition Documentation](https://github.com/Sayter99/face_recognition_ultra_light/blob/master/README.md).
@@ -76,6 +87,6 @@ Demonstration
 License Information
 -------------------
 
-This product is _**open source**_! 
+This product is _**open source**_!
 
-Distributed as-is; no warranty is given. This is not a medical device and should not be used for the detection or prevention of disease, illness or otherwise. 
+Distributed as-is; no warranty is given. This is not a medical device and should not be used for the detection or prevention of disease, illness or otherwise.
