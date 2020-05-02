@@ -37,7 +37,7 @@ class Publisher(MQTTClient):
 if __name__ == "__main__":
     client_url_env = "CLOUDMQTT_URL"
     dummymsg_funcs = {
-        "austin/eye/motion": eye_msg,
+        "austin/eye/detected_emotion": emotion_msg,
         "austin_gestures/body/gesture": gesture_msg,
         "austin_anxiety/belt/therapy": stress_msg
     }

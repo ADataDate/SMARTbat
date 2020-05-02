@@ -3,10 +3,13 @@ import json
 import numpy as np
 from constant import EMOTIONS, GESTURES, STRESS, NAMES
 
+def emotion_msg():
+    return np.random.choice(EMOTIONS)
 
+"""
 def eye_msg():
     n = len(EMOTIONS)
-    nums = np.random.rand(n)
+    nums = np.random.rand(1)
     emotion_percentages = nums/np.sum(nums)
 
     vals = {
@@ -22,6 +25,7 @@ def eye_msg():
     vals_json = json.dumps(vals)
 
     return vals_json
+"""
 
 def gesture_msg():
     return np.random.choice(GESTURES)
